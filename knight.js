@@ -1,3 +1,5 @@
+var Knight = require("./livingcreature")
+
 class Knight extends LivingCreature {
     constructor(x, y, index) {
         super(x,y,index)
