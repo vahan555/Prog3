@@ -2,7 +2,7 @@
 //! Requiring modules  --  START
 var Grass = require("./modules/Grass.js");
 var GrassEater = require("./modules/GrassEater.js");
-var Predator = require("./modules/predator.js");
+var Predator = require("./modules/Predator.js");
 var Witcher = require("./modules/witcher.js");
 var Knight = require("./modules/knight.js");
 let random = require('./modules/random');
@@ -60,7 +60,7 @@ function matrixGenerator(matrixSize, grass, grassEater, predator, witcher, knigh
         matrix[customY][customX] = 5;
     }
 }
-matrixGenerator(20, 1, 1, 1, 1, 1);
+matrixGenerator(20, 5, 15, 20, 5, 5);
 //! Creating MATRIX -- END
 
 
@@ -125,26 +125,17 @@ function game() {
     }
     if (predatorArr[0] !== undefined) {
         for (var i in predatorArr) {
-            predatorArr[i].move();
             predatorArr[i].eat();
-            predatorArr[i].mul();
-            predatorArr[i].die();
         }
     }
     if (witcherArr[0] !== undefined) {
         for (var i in witcherArr) {
-            witcherArr[i].move();
             witcherArr[i].eat();
-            witcherArr[i].create();
-            witcherArr[i].die();
         }
     }
     if (knightArr[0] !== undefined) {
         for (var i in knightArr) {
-            knightArr[i].move();
             knightArr[i].eat();
-            knightArr[i].mul();
-            knightArr[i].die();
         }
     }
 

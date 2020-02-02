@@ -2,7 +2,7 @@ var LiveForm = require("./LiveForm");
 var random = require("./random.js");
 
 
-module.exports = class Knight extends LiveForm {
+module.exports = class Predator extends LiveForm {
     constructor(x, y) {
         super(x,y)
         this.life = 20;
@@ -16,23 +16,7 @@ module.exports = class Knight extends LiveForm {
             [this.x + 1, this.y],
             [this.x - 1, this.y + 1],
             [this.x, this.y + 1],
-            [this.x + 1, this.y + 1],
-            [this.x - 2, this.y - 2],
-            [this.x - 1, this.y - 2],
-            [this.x, this.y - 2],
-            [this.x + 1, this.y - 2],
-            [this.x + 2, this.y - 2],
-            [this.x - 2, this.y - 1],
-            [this.x + 2, this.y - 1],
-            [this.x - 2, this.y],
-            [this.x + 2, this.y],
-            [this.x - 2, this.y + 1],
-            [this.x + 2, this.y + 1],
-            [this.x - 2, this.y + 2],
-            [this.x - 1, this.y + 2],
-            [this.x, this.y + 2],
-            [this.x + 1, this.y + 2],
-            [this.x + 2, this.y + 2]
+            [this.x + 1, this.y + 1]
         ];
     }
     chooseCell(character) {
@@ -45,12 +29,12 @@ module.exports = class Knight extends LiveForm {
         let newCell = random(emptyCells);
 
         if (newCell) {
-            knightHashiv++
+            predatorHashiv++
             let x = newCell[0];
             let y = newCell[1];
-            matrix[y][x] = 5;
-            let knight = new Knight(x, y);
-            knightArr.push(knight);
+            matrix[y][x] = 3;
+            let predator = new Predator(x, y);
+            predatorArr.push(predator);
             this.life = 20;
         }
     }
@@ -62,7 +46,7 @@ module.exports = class Knight extends LiveForm {
         if (newCell) {
             let x = newCell[0];
             let y = newCell[1];
-            matrix[y][x] = 5;
+            matrix[y][x] = 3;
             matrix[this.y][this.x] = 0;
             this.y = y;
             this.x = x;
@@ -81,7 +65,7 @@ module.exports = class Knight extends LiveForm {
             let x = newCell[0];
             let y = newCell[1];
 
-            matrix[y][x] = 5;
+            matrix[y][x] = 3;
             matrix[this.y][this.x] = 0;
 
             for (let i in grassEaterArr) {
@@ -103,9 +87,9 @@ module.exports = class Knight extends LiveForm {
     die() {
         matrix[this.y][this.x] = 0;
 
-        for (let i in knightArr) {
-            if (knightArr[i].x == this.x && knightArr[i].y == this.y) {
-                knightArr.splice(i, 1)
+        for (let i in predatorArr) {
+            if (predatorArr[i].x == this.x && predatorArr[i].y == this.y) {
+                predatorArr.splice(i, 1)
             }
         }
     }

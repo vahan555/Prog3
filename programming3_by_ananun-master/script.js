@@ -49,10 +49,10 @@ function setup() {
                     fill('red');
                     rect(j * side, i * side, side, side);
                 } else if (matrix[i][j] == 4) {
-                    fill('blue');
+                    fill('black');
                     rect(j * side, i * side, side, side);
                 } else if (matrix[i][j] == 5) {
-                    fill('yellow');
+                    fill('white');
                     rect(j * side, i * side, side, side);
                 }
             }

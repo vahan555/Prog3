@@ -1,12 +1,13 @@
 var LiveForm = require("./LiveForm");
+var GrassEater = require("./GrassEater");
 var random = require("./random.js");
 
 
 
 module.exports = class Witcher extends LiveForm {
-    constructor(x, y,) {
+    constructor(x, y) {
         super(x,y)
-        this.energy = 20;
+        this.life = 20;
     }
     getNewCoordinates() {
         this.directions = [
@@ -26,22 +27,21 @@ module.exports = class Witcher extends LiveForm {
 
     }
     move() {
-        var newCell = random(this.chooseCell(0));
+        this.life--;
+        let emptyCells = this.chooseCell(0);
+        let newCell = random(emptyCells);
+
         if (newCell) {
-            var newX = newCell[0];
-            var newY = newCell[1];
-
+            let x = newCell[0];
+            let y = newCell[1];
+            matrix[y][x] = 4;
             matrix[this.y][this.x] = 0;
-            matrix[newY][newX] = this.index;
-
-
-            this.y = newY;
-            this.x = newX;
-            this.energy--;
-
-
+            this.y = y;
+            this.x = x;
         }
-
+        if (this.life < 0) {
+            this.die();
+        }
     }
     eat() {
         var Cell = this.chooseCell(3)
@@ -55,7 +55,7 @@ module.exports = class Witcher extends LiveForm {
             var newY = newCell[1];
             console.log(newX,newY)
             matrix[this.y][this.x] = 0;
-            matrix[newY][newX] = this.index;
+            matrix[newY][newX] = 4;
     
             for (var i in predatorArr) {
                 if (newX == predatorArr[i].x && newY == predatorArr[i].y) {
@@ -73,31 +73,35 @@ module.exports = class Witcher extends LiveForm {
     
             this.y = newY;
             this.x = newX;
-            this.energy += 2;
-    
+            this.life += 2;
         }
+        else if(this.life >= 20){
+            this.create()
+        }
+        else {
+            this.move()
+        }
+        
     }
     create() {
-        var newCell = random(this.chooseCell(0));
+        let emptyCells = this.chooseCell(0);
+        let newCell = random(emptyCells);
 
         if (newCell) {
-            if (this.energy >= 23) {
-                var eater = new GrassEater(newCell[0], newCell[1], 2);
-                grassEaterArr.push(eater);
-                matrix[newCell[1]][newCell[0]] = 2
-            }
-            this.energy--;
+            grassEaterHashiv++
+            var eater = new GrassEater(newCell[0], newCell[1], 2);
+            grassEaterArr.push(eater);
+            matrix[newCell[1]][newCell[0]] = 2
+            this.life--;
         }
 
     }
     die() {
-        if (this.energy == 0) {
-            matrix[this.y][this.x] = 0;
-            for (var i in witcherArr) {
-                if (this.x == witcherArr[i].x && this.y == witcherArr[i].y) {
-                    witcherArr.splice(i, 1);
-                    break;
-                }
+        matrix[this.y][this.x] = 0;
+
+        for (let i in witcherArr) {
+            if (witcherArr[i].x == this.x && witcherArr[i].y == this.y) {
+                witcherArr.splice(i, 1)
             }
         }
     }
