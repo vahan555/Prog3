@@ -27,6 +27,7 @@ function setup() {
         predatorCountElement.innerText = data.predatorCounter;
         witcherCountElement.innerText = data.witcherCounter;
         knightCountElement.innerText = data.knightCounter;
+        weather = data.weather;
         //! Every time it creates new Canvas woth new matrix size
         createCanvas(matrix[0].length * side, matrix.length * side)
         //! clearing background by setting it to new grey color
@@ -37,22 +38,71 @@ function setup() {
         for (var i = 0; i < matrix.length; i++) {
             for (var j = 0; j < matrix[i].length; j++) {
                 if (matrix[i][j] == 1) {
-                    fill("green");
+                    if(weather == 'spring'|| weather == 'summer'){
+                        fill("green");
+                    }
+                    else if(weather == 'autumn'|| weather == 'winter'){
+                        fill("lightgreen")
+                    }
                     rect(j * side, i * side, side, side);
-                } else if (matrix[i][j] == 2) {
-                    fill("orange");
+                } else if (matrix[i][j] == 2){
+                    if(weather == 'spring'){
+                        fill("orange");
+                    }
+                    else if(weather == 'summer'){
+                        fill("#eda13e")
+                    }
+                    else if(weather == 'autumn'){
+                        fill("#eb8909")
+                    }
+                    else if(weather == 'winter'){
+                        fill("#c47610")
+                    }
                     rect(j * side, i * side, side, side);
                 } else if (matrix[i][j] == 0) {
                     fill('#acacac');
                     rect(j * side, i * side, side, side);
                 } else if (matrix[i][j] == 3) {
-                    fill('red');
+                    if(weather == 'spring'){
+                        fill("red");
+                    }
+                    else if(weather == 'summer'){
+                        fill("#f70a0a")
+                    }
+                    else if(weather == 'autumn'){
+                        fill("#f70a0a")
+                    }
+                    else if(weather == 'winter'){
+                        fill("#ad0a0a")
+                    }
                     rect(j * side, i * side, side, side);
                 } else if (matrix[i][j] == 4) {
-                    fill('black');
+                    if(weather == 'spring'){
+                        fill("#2e2d2d");
+                    }
+                    else if(weather == 'summer'){
+                        fill("black")
+                    }
+                    else if(weather == 'autumn'){
+                        fill("#383030")
+                    }
+                    else if(weather == 'winter'){
+                        fill("#473f3f")
+                    }
                     rect(j * side, i * side, side, side);
                 } else if (matrix[i][j] == 5) {
-                    fill('white');
+                    if(weather == 'spring'){
+                        fill("#d1c5c5");
+                    }
+                    else if(weather == 'summer'){
+                        fill("white")
+                    }
+                    else if(weather == 'autumn'){
+                        fill("#b5b0b0")
+                    }
+                    else if(weather == 'winter'){
+                        fill("#9e9696")
+                    }
                     rect(j * side, i * side, side, side);
                 }
             }

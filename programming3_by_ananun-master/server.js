@@ -21,6 +21,7 @@ grassEaterHashiv = 0;
 predatorHashiv = 0;
 witcherHashiv = 0;
 knightHashiv = 0;
+weather = '';
 //! Setting global arrays  -- END
 
 
@@ -60,7 +61,7 @@ function matrixGenerator(matrixSize, grass, grassEater, predator, witcher, knigh
         matrix[customY][customX] = 5;
     }
 }
-matrixGenerator(20, 5, 15, 20, 5, 5);
+matrixGenerator(20, 5, 15, 30, 5, 5);
 //! Creating MATRIX -- END
 
 
@@ -111,8 +112,24 @@ function creatingObjects() {
     }
 }
 creatingObjects();
-
+var counter;
 function game() {
+    counter++
+    if (counter > 0 && counter <= 10) {
+        weather = 'spring'
+    }
+    else if (counter > 10 && counter <= 20) {
+        weather = 'summer'
+    }
+    else if (counter > 20 && counter <= 30) {
+        weather = 'autumn'
+    }
+    else if (counter > 30 && counter <= 40) {
+        weather = 'winter'
+    }
+    else {
+        counter = 0;
+    }
     if (grassArr[0] !== undefined) {
         for (var i in grassArr) {
             grassArr[i].mul();
@@ -146,7 +163,8 @@ function game() {
         grassEaterCounter: grassEaterHashiv,
         predatorCounter: predatorHashiv,
         witcherCounter: witcherHashiv,
-        knightCounter: knightHashiv
+        knightCounter: knightHashiv,
+        weather: weather
     }
 
     //! Send data over the socket to clients who listens "data"
